@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.card-text{
+   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.list-group-item{
+  border:0
+}
+
+a.btn-danger, button.btn-warning, button.btn-danger{
+  margin-left: 10px;
+}
+small{
+  margin: 0 5px
+}
+
+span.fa{
+  margin: 10px 5px;
+}
+
+span.fa:hover{
+  cursor: pointer;
+}
