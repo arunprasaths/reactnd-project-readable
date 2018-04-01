@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS,FETCH_COMMENT, ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT, VOTE_COMMENT } from '../actions'
+import { FETCH_COMMENTS,FETCH_COMMENT, ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT, VOTE_COMMENT } from '../actions/actionTypes'
 import _ from 'lodash'
 
 export default function(state = {}, action){
@@ -9,7 +9,7 @@ export default function(state = {}, action){
         case UPDATE_COMMENT:
         case FETCH_COMMENT:
         case VOTE_COMMENT:
-             return {...state, [action.payload.id]: action.payload }    
+             return {...state, [action.payload.id]: action.payload }  
         case DELETE_COMMENT:
              return _.omit(state, action.payload)
         default:
