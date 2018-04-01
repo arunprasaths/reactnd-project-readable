@@ -2,14 +2,9 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import CommentItem from './comment-item'
 import { connect } from 'react-redux'
-import { fetchComments, voteComment, deleteComment } from '../actions'
+import { fetchComments, voteComment, deleteComment } from '../actions/commentActions'
 
 class CommentsList extends Component{   
-    componentDidMount(){
-         const {post, fetchComments } = this.props         
-         fetchComments(post.id, ()=>{}); 
-    }
-
     renderComments(){       
         const { comments, deleteComment, voteComment} = this.props;
 
@@ -38,9 +33,4 @@ class CommentsList extends Component{
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        comments: state.comments
-    }
-}
-export default connect(mapStateToProps,{ fetchComments, voteComment, deleteComment })(CommentsList)
+export default connect(null,{ fetchComments, voteComment, deleteComment })(CommentsList)

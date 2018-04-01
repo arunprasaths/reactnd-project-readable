@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import { connect } from 'react-redux'
-import { fetchCategories } from '../actions'
+import { fetchCategories } from '../actions/categoriesActions'
 
 
 class Categories extends Component{

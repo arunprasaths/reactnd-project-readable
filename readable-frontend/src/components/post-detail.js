@@ -3,12 +3,14 @@ import { formatDate } from '../utils/common'
 import { Link } from 'react-router-dom'
 
 class PostDetail extends Component{
-
+    
     render(){
         const { post, votePost, deletePost } = this.props
-
-        return(
-         <div className="card p-100">
+        
+        let commentCount = Object.keys(this.props.comments).length
+        
+        return(            
+             <div className="card p-100">
                      <div className="card-title m-t-10">
                             <h4>{post.title}</h4>            
                             <div className="card-subtitle">
@@ -30,7 +32,7 @@ class PostDetail extends Component{
                             </span>   
                             <span onClick={() => votePost(post.id, 'upVote')} className="fa fa-thumbs-o-up"> Like</span>
                             <span onClick={() => votePost(post.id, 'downVote')} className="fa fa-thumbs-down"> Dis-like</span>                         
-                            <i className="fa fa-comment p-1 mt-1"> {post.commentCount} comments</i>
+                            <i className="fa fa-comment p-1 mt-1"> {commentCount} comments</i>
                         </small>                    
                         <div className="float-right">
                             <Link to={`/posts/edit/${post.id}`} className="btn btn-sm btn-primary">Edit</Link>
