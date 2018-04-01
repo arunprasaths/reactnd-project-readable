@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { fetchPost, deletePost, votePost, fetchComments } from '../actions'
+import { fetchPost, deletePost, votePost } from '../actions/postActions'
+import { fetchComments } from '../actions/commentActions'
 
 import CommentFormPage from './comment-form-page'
 import { Link } from 'react-router-dom'
@@ -7,15 +8,22 @@ import { connect } from 'react-redux'
 
 import PostDetail from '../components/post-detail'
 import CommentsList from '../components/comment-list'
+import NotFound from '../components/NotFound'
 
 class PostShow extends Component{
-   
-    state = {
-        commentCount: 0
+  
+    constructor(){
+       super()
+       this.onDeleteClick = this.onDeleteClick.bind(this)
     }
+
     componentDidMount(){     
-         const { id } =  this.props.match.params;
-         this.props.fetchPost(id);        
+      
+        const { id } =  this.props.match.params;
+         this.props.fetchPost(id);   
+         
+         this.props.fetchComments(id, ()=>{           
+         })
     }   
 
     onDeleteClick(){
@@ -26,19 +34,19 @@ class PostShow extends Component{
 
   
     render(){
-        const { post, votePost } = this.props
+        const { post, votePost, comments } = this.props
         
         if(!post){
-            return <div>Loading.. </div>
+            return <NotFound />
         }
        
         return(
             <div className="col-10 m-auto">
                 <Link to="/" >Back To Home</Link>                
                                
-                <PostDetail post={post} votePost={votePost} deletePost={this.onDeleteClick.bind(this)} />           
+                <PostDetail comments={comments} post={post} votePost={votePost} deletePost={this.onDeleteClick} />           
                               
-                <CommentsList post={post} />                 
+                <CommentsList comments={comments} post={post} />                 
                
                 <CommentFormPage parentId={post.id}  />                
 
@@ -48,8 +56,11 @@ class PostShow extends Component{
 }
 
 const mapStateToProps = ({ posts, comments }, ownProps) => {
+
+  //  console.log('mapStateToProps - PostShow', comments)
    return { 
-       post : posts[ownProps.match.params.id]         
+       post : posts[ownProps.match.params.id],
+       comments: comments         
      }
 }
 

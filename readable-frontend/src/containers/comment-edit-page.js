@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchComment, updateComment } from '../actions';
+import { fetchComment, updateComment } from '../actions/commentActions';
 import CommentForm from '../components/comment-form'
 
 class CommentEditPage extends Component {

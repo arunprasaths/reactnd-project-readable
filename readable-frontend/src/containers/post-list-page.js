@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PostList from '../components/post-list'
 import Header from '../components/header'
 import Categories from '../components/categories'
-import { fetchPosts, deletePost, votePost } from '../actions'
+import { fetchPosts, deletePost, votePost } from '../actions/postActions'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
@@ -31,15 +31,22 @@ class PostListPage extends Component{
     }
         
     render(){
-        let { posts } = this.props
+        let posts  = this.props.posts
         const {deletePost, votePost ,filtercategory } = this.props
 
-        if(filtercategory){          
-            posts = _.filter(posts, {'category': filtercategory})
-        }
+        posts = (() => {
+            if(filtercategory){          
+                return _.filter(posts, {'category': filtercategory})
+            }
+            return _.orderBy(posts, [this.state.sortBy], [this.state.sortOrder] );
+        })();
 
-        //appy sorting and ordering
-        posts = _.orderBy(posts, [this.state.sortBy], [this.state.sortOrder] );
+        // if(filtercategory){          
+        //     posts = _.filter(posts, {'category': filtercategory})
+        // }
+
+        // //appy sorting and ordering
+        // posts = _.orderBy(posts, [this.state.sortBy], [this.state.sortOrder] );
 
         return (
             <div className="row justify-content-md-center">

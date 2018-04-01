@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CommentForm from '../components/comment-form'
 import { connect } from 'react-redux'
-import { addComment } from '../actions'
+import { addComment } from '../actions/commentActions'
 
 class CommentFormPage extends Component {
 

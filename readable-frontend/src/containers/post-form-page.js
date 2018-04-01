@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createPost, savePost, fetchPost, updatePost, fetchCategories } from '../actions'
+import { createPost, savePost, fetchPost, updatePost } from '../actions/postActions'
+import { fetchCategories } from '../actions/categoriesActions'
 import PostForm from '../components/post-form'
 
 
